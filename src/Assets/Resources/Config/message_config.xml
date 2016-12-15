@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config>
+	<table_host value="10.1.18.2" /> <!-- 10.TE.AM.2 for static or roboRIO-TEAM-frc.local for DHCP/mDNS -->
+	
+	<comm_mode value="TCP" /> <!-- TCP or UDP (anything other than TCP means use UDP) -->
+	<dest_host value="127.0.0.1" />
+	<dest_port value="8765" />
+	
+	<message>
+	     <value name="Auton Enabled: " 		type="boolean" 	default="false" />
+	     <value name="Auton Delay: " 		type="float" 	default="0.0" />
+	     <value name="vision range" 		type="float" 	default="-999.0" />
+	     <value name="vision azimuth" 		type="float" 	default="-999.0" />
+	     <value name="vision recognized" 	type="boolean" 	default="false" /> 
+	     <value name="Drv gyro act" 		type="float" 	default="0.0" /> 
+	</message>
+</config>

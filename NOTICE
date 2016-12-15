@@ -1,0 +1,11 @@
+HoloFirst
+Copyright (c) 2016 United States Government as represented by the Administrator of the National Aeronautics and Space Administration. All Rights Reserved.
+
+This project uses code from HoloToolkit-Unity
+Available at: https://github.com/Microsoft/HoloToolkit-Unity
+Under: MIT License
+Copyright (c) 2016 Microsoft Corporation
+
+This project used code from the unity community (Singleton)
+Available at: http://wiki.unity3d.com/index.php?title=Singleton
+Under: CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0/)

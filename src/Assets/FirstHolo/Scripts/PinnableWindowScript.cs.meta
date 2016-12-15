@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b028e94e043829547bbf23a04e432d69
+timeCreated: 1457991467
+licenseType: Pro
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - pinButton: {instanceID: 0}
+  - pinSound: {fileID: 8300000, guid: b8284fbce61f83f49ae3c5b74a548be1, type: 3}
+  - unpinSound: {fileID: 8300000, guid: fc1ac8b832e2cfe4e9cf97b2a006e3c5, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

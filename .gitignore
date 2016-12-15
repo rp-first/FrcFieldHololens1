@@ -1,0 +1,12 @@
+Library/
+Temp/
+Build/
+*.suo
+*.csproject
+UWP/
+*sln
+*.csproj
+!*.dll
+!*.pdb
+!*.obj
+MessageEnum.dll*
