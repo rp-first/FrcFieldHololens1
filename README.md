@@ -29,6 +29,39 @@ what should work.*
 
 ## Using the Example
 
+To get started, open Unity using the `src` folder. After unity is done importing
+the assets you can navigate to `Assets/Example/Scenes` and open FieldPlacementExample.
+This scene gives an example of placing a model with annotations.
+
+The controls while in the Unity editor play mode are:
+- Mouse left click as tap, mouse cursor is the target
+- Ctrl+Mouse move to rotate the view
+- `WASD` keys to move around
+
+To test on the device, open the build menu, `File > Building Settings...`. The
+platform should be set to Windows Store, SDK to Universal 10, UWP build type to
+D3D, and  Unity C# Projects checked.
+
+![Unity build settings](docs/imgs/unity_build_settings.png)
+
+It will ask you for a folder to build out to. Once it's built, open the Visual
+Studio project in the exported folder. Finally build and deploy it, there are
+a few ways to do this, detailed by Microsoft
+[here](https://developer.microsoft.com/en-us/windows/holographic/holograms_100#chapter_5_-_build_and_deploy)
+ in Chapter 5.
+
+ When the app opens on the device, tap to pin the window to a surface. The top-left
+ corner of the window has a pencil icon, when clicked will start the alignment process.
+ This will show a transparent market. Tap to place the markers in the order/placement
+ shown below, in the middle against the wall. (*This is the
+ [FIRST 2016 stronghold field](https://firstfrc.blob.core.windows.net/frc2016manuals/2016FieldAssembly.pdf)*)
+
+ ![Arena marker placement](docs/imgs/top-down-field.png)
+
+ If the pins aren't completely level with the ground, keep your fingers pinched
+ and drag up/down to adjust. The field will be visible once you check the box for
+ "Field Model" on the window.
+
 ### Pushing data from robot
 
 The server integrates with smart dashboard and the code/instructions can found [here](https://github.com/rp-first/NetTableToSocket).
@@ -121,6 +154,13 @@ The `AlignmentManager` is responsible for performing initial alignment and reali
 ### Speech
 
 `SpeechRecognizer` is a wrapper around the SpeechRecognition APIs that allows for the definition of simple command phrases and associated actions.  Simply define a word or phrase and assign a `SpeechAction` within the editor.  When that phrase is recognized, that event will be triggered.
+
+In the example there are 3 phrases available:
+- "unpin window" - Unpins the window and brings it to you
+- "lock window" - pins the window in place
+- "red rover" - same as unpin window
+
+These can be seen on the `SpeechRecognizer` object in the scene root.
 
 ### HoloHuD
 
