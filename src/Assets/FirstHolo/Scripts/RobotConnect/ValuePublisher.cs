@@ -18,6 +18,7 @@
 using System;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace FirstUtilities
 {
@@ -25,7 +26,15 @@ namespace FirstUtilities
 	{
 		public ValuePublisher ()
 		{}
-
+        public readonly static Queue<Action> ExecuteOnMainThread = new Queue<Action>();
+        public void Update()
+        {
+            // dispatch stuff on main thread
+            while (ExecuteOnMainThread.Count > 0)
+            {
+                ExecuteOnMainThread.Dequeue().Invoke();
+            }
+        }
 		public void Subscribe(int index, Action<ValueItem> onValueUpdate) {
 			
 			// create subscribers for index
@@ -70,22 +79,23 @@ namespace FirstUtilities
 			if (!_values.ContainsKey(index)) {
 				_values.Add (index, valueToPush);
 				// update value
-				StartCoroutine(pushToSubscribers(index));
+                ExecuteOnMainThread.Enqueue(() => { pushToSubscribers(index); });
+                
 			}
 			else {
 				ValueItem vi = _values [index] as ValueItem;
 				if (vi.value != valueToPush.value) {
 					_values[index] = valueToPush;
-					// update value
-					StartCoroutine(pushToSubscribers(index));
-				}
+                    // update value
+                    ExecuteOnMainThread.Enqueue(() => { pushToSubscribers(index); });
+                }
 			}
 		}
 
 		private Hashtable _values = new Hashtable();
 		private Hashtable _subscribers = new Hashtable();
 
-		private IEnumerator pushToSubscribers(int index) {
+		private void pushToSubscribers(int index) {
 			
 			// get the subscriber list
 			ArrayList subscribersForItem = _subscribers [index] as ArrayList;
@@ -100,8 +110,7 @@ namespace FirstUtilities
 					}
 				}
 			}
-
-			yield break;
+            
 		}
 	}
 }

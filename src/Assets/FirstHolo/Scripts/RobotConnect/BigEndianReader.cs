@@ -54,7 +54,7 @@ class NetworkEndianReader : BinaryReader
     {
         a64 = base.ReadBytes(8);
         if (BitConverter.IsLittleEndian) Array.Reverse(a64);
-        return BitConverter.ToSingle(a64, 0);
+        return BitConverter.ToDouble(a64, 0);
     }
 
 }
