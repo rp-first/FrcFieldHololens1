@@ -54,10 +54,10 @@ a few ways to do this, detailed by Microsoft
  corner of the window has a pencil icon, when clicked will start the alignment process.
  This will show a transparent market. Tap to place the markers in the order
  shown below:
-   1. Where the corner of the driverstation wall meets the floor in the red retrieval zone
-   2. Where the corner of the driverstation wall meets the floor in the blue key
-   3. Where the corner of the driverstation wall meets the floor in the the red key
-   4. Where the corner of the driverstation wall meets the floor in the red retrieval zone
+   1. Where the corner of the Driver's Station wall meets the floor in the red retrieval zone
+   2. Where the corner of the Driver's Station wall meets the floor in the blue key
+   3. Where the corner of the Driver's Station wall meets the floor in the red key
+   4. Where the corner of the Driver's Station wall meets the floor in the blue retrieval zone
 
 Note: When placing the field in an open space, pick a rectangle on the ground and place the pins at the four corners in a clockwise direction. The software will do a best fit placement even if the rectangle you pick is much smaller than the actual field.
 
