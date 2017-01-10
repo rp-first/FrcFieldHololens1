@@ -52,15 +52,21 @@ a few ways to do this, detailed by Microsoft
 
  When the app opens on the device, tap to pin the window to a surface. The top-left
  corner of the window has a pencil icon, when clicked will start the alignment process.
- This will show a transparent market. Tap to place the markers in the order/placement
- shown below, in the middle against the wall. (*This is the
- [FIRST 2016 stronghold field](https://firstfrc.blob.core.windows.net/frc2016manuals/2016FieldAssembly.pdf)*)
+ This will show a transparent market. Tap to place the markers in the order
+ shown below:
+   1. Where the corner of the driverstation wall meets the floor in the red retrieval zone
+   2. Where the corner of the driverstation wall meets the floor in the blue key
+   3. Where the corner of the driverstation wall meets the floor in the the red key
+   4. Where the corner of the driverstation wall meets the floor in the red retrieval zone
 
- ![Arena marker placement](docs/imgs/top-down-field.png)
+Note: When placing the field in an open space, pick a rectangle on the ground and place the pins at the four corners in a clockwise direction. The software will do a best fit placement even if the rectangle you pick is much smaller than the actual field.
 
- If the pins aren't completely level with the ground, keep your fingers pinched
- and drag up/down to adjust. The field will be visible once you check the box for
- "Field Model" on the window.
+ ![Arena marker placement](docs/imgs/top-down-field.jpg)
+
+If the tip of the pins aren't exactly where you want them, keep your fingers pinched 
+and drag up/down/left/right/in/out to adjust them to the desired spot on the ground. Getting 
+your head closer to the ground will help you see if the tip of the pin is touching the ground 
+or just above the ground. After placing the last pin you should see the field model.
 
 ### Pushing data from robot
 
