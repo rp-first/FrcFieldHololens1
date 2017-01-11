@@ -32,7 +32,7 @@ what should work.*
 If you have any problems with the software or documentation, look through the
 issues on GitHub for a potential solution. If none of the previously reported
 issues match your problem, open a new one.
- 
+
 ## Using the Example
 
 To get started, open Unity using the `src` folder. After unity is done importing
@@ -69,9 +69,9 @@ Note: When placing the field in an open space, pick a rectangle on the ground an
 
  ![Arena marker placement](docs/imgs/top-down-field.jpg)
 
-If the tip of the pins aren't exactly where you want them, keep your fingers pinched 
-and drag up/down/left/right/in/out to adjust them to the desired spot on the ground. Getting 
-your head closer to the ground will help you see if the tip of the pin is touching the ground 
+If the tip of the pins aren't exactly where you want them, keep your fingers pinched
+and drag up/down/left/right/in/out to adjust them to the desired spot on the ground. Getting
+your head closer to the ground will help you see if the tip of the pin is touching the ground
 or just above the ground. After placing the last pin you should see the field model.
 
 ### Pushing data from robot
@@ -162,6 +162,21 @@ The tracking system requires two or more points to align the field, but a minimu
 The `TrackableLocation` component is used to specify a region of space that can be aligned with the real world.  Feature points are specified to align the space as well as locate the location at runtime.  Note that `TrackableLocation` uses the underlying `WorldAnchor` component and therefore when it is anchored (this occurs after it has been aligned) the `TrackableLocation` will not be moveable.
 
 The `AlignmentManager` is responsible for performing initial alignment and realignment of a `TrackableLocation`.  The `Align` or `ToggleAlignment` function should be called with the corresponding `TrackableLocation` reference.  Once called, the HoloLens user will place beacons in the real world that correspond to the points specified in the `TrackableLocation`.  These beacons will adhere to the world surface and are placed by air tapping.  A single air tap will place the beacon, but holding the tap and dragging the hand will allow for fine tuning of the beacon placement.
+
+#### Fixing field placement after initial drop
+
+There are some additional voice commands added to allow edits to field placement.
+
+- "Adjust field" - start field adjustment
+- "Native" - (default mode) allows pin position translation
+- "Translate" - (mode) allows field offset
+- "Rotate" - (mode) allows field rotation, pivot is always center
+- "Reset field offset" - puts all offsets back to 0
+- "cancel adjust" - end adjustment
+
+Each mode uses the manipulation gesture and can be canceled by dragging far out of
+the Hololens's field of view. To edit voice commands or manually call the functions
+see the `FieldAdjustmentMgr` class.
 
 ### Speech
 

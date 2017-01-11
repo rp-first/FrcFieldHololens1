@@ -30,6 +30,9 @@ public class TrackableLocation : MonoBehaviour
     private WorldAnchorStore store;
 
     public GameObject pointStandin;
+    public GameObject anchorStandin;
+
+    public Transform offset;
 
     [SerializeField]
     private bool m_visualizeTrackingPoints = false;
@@ -42,13 +45,38 @@ public class TrackableLocation : MonoBehaviour
             {
 
                 if (t.childCount == 0)
-                    GameObject.Instantiate(pointStandin, t, false);
+                {
+                    var instance = (GameObject)GameObject.Instantiate(pointStandin, t, false);
+                }
                 
                 for (int i = 0; i < t.childCount; i++)
                     t.GetChild(i).gameObject.SetActive(value);
             }
         }
     }
+
+    [SerializeField]
+    private bool m_visualizeAnchorPoints = false;
+    public bool visualizeAnchorPoints
+    {
+        get { return m_visualizeAnchorPoints; }
+        set
+        {
+            m_visualizeAnchorPoints = value;
+            foreach (GameObject anchor in m_anchors)
+            {
+
+                if (anchor.transform.childCount == 0)
+                {
+                    var instance = (GameObject)GameObject.Instantiate(anchorStandin, anchor.transform, false);
+                }
+
+                for (int i = 0; i < anchor.transform.childCount; i++)
+                    anchor.transform.GetChild(i).gameObject.SetActive(value);
+            }
+        }
+    }
+
     [SerializeField]
     private List<Transform> m_trackingPoints = new List<Transform>();
 
@@ -163,6 +191,7 @@ public class TrackableLocation : MonoBehaviour
         //retrieve the WorldAnchorStore and load previous calibration values
         WorldAnchorStore.GetAsync(StoreLoaded);
         visualizeTrackingPoints = visualizeTrackingPoints;
+        visualizeAnchorPoints = visualizeAnchorPoints;
     }
     void Update()
     {
@@ -177,7 +206,7 @@ public class TrackableLocation : MonoBehaviour
         {
             if (i >= Anchors.Count)
             {
-                m_anchors.Add(new GameObject());
+                m_anchors.Add(new GameObject("WAnchor_" + i));
                 //default location to where the workspace currently is
                 m_anchors[i].transform.position = m_trackingPoints[i].position;
             }
@@ -190,8 +219,21 @@ public class TrackableLocation : MonoBehaviour
                 m_anchors[i].gameObject.AddComponent<WorldAnchor>();
             }
         }
-       
 
+        if (offset)
+        {
+            Vector3 lPos, lRot;
+            lPos.x = PlayerPrefs.GetFloat(gameObject.name + "PX", 0);
+            lPos.y = PlayerPrefs.GetFloat(gameObject.name + "PY", 0);
+            lPos.z = PlayerPrefs.GetFloat(gameObject.name + "PZ", 0);
+
+            lRot.x = PlayerPrefs.GetFloat(gameObject.name + "RX", 0);
+            lRot.y = PlayerPrefs.GetFloat(gameObject.name + "RY", 0);
+            lRot.z = PlayerPrefs.GetFloat(gameObject.name + "RZ", 0);
+
+            offset.localPosition = lPos;
+            offset.localRotation = Quaternion.Euler(lRot);
+        }
     }
 
     private void AlignToAnchors()
@@ -226,10 +268,16 @@ public class TrackableLocation : MonoBehaviour
             Quaternion anchorsLookRotation = Quaternion.LookRotation(anchorsForward, anchorsNormal);//
             Quaternion deltaRotation = anchorsLookRotation * Quaternion.Inverse(originalLookRotation);
 
-            transform.rotation= deltaRotation;
+            transform.rotation = deltaRotation;
             trackingPointsCenter = this.center;
             Vector3 deltaPosition = anchorsGlobalCenter - trackingPointsCenter;
             transform.position += deltaPosition;
+
+            if(offset)
+            {
+                transform.rotation = offset.localRotation * transform.rotation;
+                transform.position += offset.localPosition;
+            }
           
             
         }
@@ -261,15 +309,47 @@ public class TrackableLocation : MonoBehaviour
                 else
                     Debug.Log("Failed to save anchor for " + sub_id);
             }
+            SaveOffset();
         }
         else
             Debug.Log("Unable to save location, store not loaded");
+    }
+
+    public void SaveOffset()
+    {
+        if (offset)
+        {
+            PlayerPrefs.SetFloat(gameObject.name + "PX", offset.localPosition.x);
+            PlayerPrefs.SetFloat(gameObject.name + "PY", offset.localPosition.y);
+            PlayerPrefs.SetFloat(gameObject.name + "PZ", offset.localPosition.z);
+
+            var lAngle = offset.localRotation.eulerAngles;
+            PlayerPrefs.SetFloat(gameObject.name + "RX", lAngle.x);
+            PlayerPrefs.SetFloat(gameObject.name + "RY", lAngle.y);
+            PlayerPrefs.SetFloat(gameObject.name + "RZ", lAngle.z);
+
+            PlayerPrefs.Save();
+        }
+    }
+
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause) SaveOffset();
     }
 
     private void StoreLoaded(WorldAnchorStore store)
     {
         this.store = store;
         LoadSavedLocation();
+    }
+
+    public void ResetOffset()
+    {
+        if(offset)
+        {
+            offset.localPosition = Vector3.zero;
+            offset.localRotation = Quaternion.identity;
+        }
     }
 
 }

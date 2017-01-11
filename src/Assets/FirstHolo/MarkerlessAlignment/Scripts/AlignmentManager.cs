@@ -57,6 +57,10 @@ public class AlignmentManager : MonoBehaviour {
         }
         if (spatialCollider)
             spatialCollider.freezeUpdates = false;
+
+        // for adjustment after alignment
+        location.ResetOffset();
+
         StartCoroutine(locate(location));
     }
     public void CancelAlignment()
@@ -163,7 +167,7 @@ public class AlignmentManager : MonoBehaviour {
                 }
                 else
                 {
-                    points[i] = new GameObject().transform;
+                    points[i] = new GameObject("WAnchor_" + i).transform;
                     points[i].position = beaconCursor.transform.position;
                 }
                 i++;
@@ -184,7 +188,7 @@ public class AlignmentManager : MonoBehaviour {
             GameObject locationAnchorObject;
             if (i >= location.Anchors.Count)
             {
-                location.Anchors.Add( new GameObject());
+                location.Anchors.Add( new GameObject("WAnchor_"+i));
             }
             locationAnchorObject = location.Anchors[i];
             WorldAnchor locationAnchor = locationAnchorObject.GetComponent<WorldAnchor>();
