@@ -6,6 +6,7 @@ Available at: https://github.com/Microsoft/HoloToolkit-Unity
 Under: MIT License
 Copyright (c) 2016 Microsoft Corporation
 
-This project used code from the unity community (Singleton)
+This project uses code from the unity community (Singleton, Averaging Quaternions)
 Available at: http://wiki.unity3d.com/index.php?title=Singleton
+http://wiki.unity3d.com/index.php?title=Averaging_Quaternions_and_Vectors
 Under: CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0/)

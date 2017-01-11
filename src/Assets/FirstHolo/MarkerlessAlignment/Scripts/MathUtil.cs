@@ -107,6 +107,9 @@ public class MathUtil {
         return normal.normalized;
     }
 
+    // below from http://wiki.unity3d.com/index.php/Averaging_Quaternions_and_Vectors
+    // CC BY-SA 3.0
+
     //Get an average (mean) from more then two quaternions (with two, slerp would be used).
     //Note: this only works if all the quaternions are relatively close together.
     //Usage: 
