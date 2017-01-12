@@ -27,6 +27,12 @@ appears to be fine.*
 **Note:** *GPU and RAM recommendations were not tested but are an estimate of
 what should work.*
 
+## Reporting Problems
+
+If you have any problems with the software or documentation, look through the
+issues on GitHub for a potential solution. If none of the previously reported
+issues match your problem, open a new one.
+ 
 ## Using the Example
 
 To get started, open Unity using the `src` folder. After unity is done importing
