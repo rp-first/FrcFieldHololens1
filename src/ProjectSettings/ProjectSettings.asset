@@ -10,8 +10,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: FIRST-NASA
-  productName: FrcField
+  companyName: firstrobotics
+  productName: firstrobotics
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenStyle: 0
@@ -344,13 +344,13 @@ PlayerSettings:
   psmSplashimage: {fileID: 0}
   spritePackerPolicy: 
   scriptingDefineSymbols: {}
-  metroPackageName: FrcField
+  metroPackageName: firstrobotics
   metroPackageVersion: 1.0.0.0
-  metroCertificatePath: Assets\WSATestCertificate.pfx
-  metroCertificatePassword: 
-  metroCertificateSubject: DefaultCompany
-  metroCertificateIssuer: DefaultCompany
-  metroCertificateNotAfter: 00c6848236afd201
+  metroCertificatePath: Assets/WSATestCertificate.pfx
+  metroCertificatePassword: "je~\x7Fx~cncxeo\x7F"
+  metroCertificateSubject: firstrobotics
+  metroCertificateIssuer: firstrobotics
+  metroCertificateNotAfter: 806b304dd389d301
   metroApplicationDescription: holonaut
   wsaImages: {}
   metroTileShortName: holonaut
