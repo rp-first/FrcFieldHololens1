@@ -26089,7 +26089,7 @@ GameObject:
   - component: {fileID: 845041734}
   - component: {fileID: 845041735}
   - component: {fileID: 845041733}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: UWPServer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26109,24 +26109,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runAtStartup: 1
   emulateServerConnection: 0
---- !u!224 &845041734
-RectTransform:
+--- !u!4 &845041734
+Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 845041732}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -6.836}
+  m_LocalPosition: {x: 0.8930969, y: -0.33563232, z: -6.836}
   m_LocalScale: {x: 0.001875, y: 0.001875, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.8930969, y: -0.33563232}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &845041735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30538,7 +30533,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22409162, guid: 8436b6ecda3c395469273268e0d23d3d, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 563
+      value: 655
       objectReference: {fileID: 0}
     - target: {fileID: 22409162, guid: 8436b6ecda3c395469273268e0d23d3d, type: 2}
       propertyPath: m_AnchorMin.x
@@ -30574,7 +30569,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22438542, guid: 8436b6ecda3c395469273268e0d23d3d, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 923
+      value: 1015
       objectReference: {fileID: 0}
     - target: {fileID: 22427734, guid: 8436b6ecda3c395469273268e0d23d3d, type: 2}
       propertyPath: m_SizeDelta.x
@@ -30630,7 +30625,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22438542, guid: 8436b6ecda3c395469273268e0d23d3d, type: 2}
       propertyPath: m_Pivot.y
-      value: 0.49945828
+      value: 0.4995074
       objectReference: {fileID: 0}
     - target: {fileID: 11405914, guid: 8436b6ecda3c395469273268e0d23d3d, type: 2}
       propertyPath: bottomMargin
@@ -43082,7 +43077,6 @@ GameObject:
   - component: {fileID: 1393428599}
   - component: {fileID: 1393428598}
   - component: {fileID: 1393428603}
-  - component: {fileID: 1393428602}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -43158,21 +43152,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1393428602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1393428596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 120ba207cff42584584563bcf18c124f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ExtraMouseSensitivityScale: 3
-  DefaultMouseSensitivity: 0.1
-  MouseLookButton: 3
-  IsControllerLookInverted: 1
 --- !u!114 &1393428603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50729,7 +50708,7 @@ Transform:
   m_LocalScale: {x: 0.03, y: 0.2, z: 0.03}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1660012705
 MonoBehaviour:
