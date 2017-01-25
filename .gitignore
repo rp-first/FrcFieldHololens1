@@ -1,6 +1,6 @@
 Library/
 Temp/
-Build/
+/Build/
 *.suo
 *.csproject
 UWP/
