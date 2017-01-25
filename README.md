@@ -8,15 +8,11 @@ Last tested versions were
 - [Visual Studios 2015 Update 3](https://www.visualstudio.com/post-download-vs/?sku=community&clcid=0x409&telem=ga)
   - With Windows 10 SDK
   - With Universal Windows App Development Tools
-- [Unity 5.4.0f3-HTP](http://beta.unity3d.com/download/b21dfedb4779/UnityDownloadAssistant.exe?_ga=1.101692035.341886031.1470231455)
+- [Unity 5.5.1f1](https://unity3d.com/get-unity/download?thank-you=update&download_nid=45035&os=Win)
   - With Windows Store .NET Scripting Backend
 - [Hololens Emulator b10.0.14393.0](http://go.microsoft.com/fwlink/?LinkID=823018)
 
 Download the server and it's requirements [here](https://github.com/rp-first/NetTableToSocket)
-
-**Note:** *Unity 5.5.0f3 is the recommended version but there are currently some issues
-with the HoloInputModule while testing within the editor. Testing on the device/emulator
-appears to be fine.*
 
 ### Hardware Requirements
 
@@ -39,10 +35,13 @@ To get started, open Unity using the `src` folder. After unity is done importing
 the assets you can navigate to `Assets/Example/Scenes` and open FieldPlacementExample.
 This scene gives an example of placing a model with annotations.
 
-The controls while in the Unity editor play mode are:
-- Mouse left click as tap, mouse cursor is the target
-- Ctrl+Mouse move to rotate the view
-- `WASD` keys to move around
+The controls while in the Unity editor play mode (without controller):
+- Mouse right-click + drag to move camera
+- Shift for left hand to be shown, Space for right hand
+
+Otherwise if there is a controller available use `Window > Holographic Emulation`
+and change emulation mode to *Simulate in Editor* or try *Remote to Device* with
+Hololens connected.
 
 To test on the device, open the build menu, `File > Building Settings...`. The
 platform should be set to Windows Store, SDK to Universal 10, UWP build type to
@@ -54,7 +53,7 @@ It will ask you for a folder to build out to. Once it's built, open the Visual
 Studio project in the exported folder. Finally build and deploy it, there are
 a few ways to do this, detailed by Microsoft
 [here](https://developer.microsoft.com/en-us/windows/holographic/holograms_100#chapter_5_-_build_and_deploy)
- in Chapter 5.
+ in Chapter 5. Optionally you can try `HoloToolkit > Build Window`.
 
  When the app opens on the device, tap to pin the window to a surface. The top-left
  corner of the window has a pencil icon, when clicked will start the alignment process.
@@ -189,7 +188,7 @@ In the example there are 3 phrases available:
 
 These can be seen on the `SpeechRecognizer` object in the scene root.
 
-### HoloHuD
+### HoloHud
 
 An experimental heads up display is provided with the `HoloHud` component.  This allows UI elements to be placed persistently within the user's field of view.  Note that a persistent HUD can cause disorientation if not constructed properly, so it is recommended to use this component with caution.
 

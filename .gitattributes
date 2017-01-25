@@ -3,4 +3,4 @@
 *.prefab text eol=lf
 *.mat text eol=lf
 *.meta text eol=lf
-*.cs -crlf
+*.cs -lf
