@@ -66,7 +66,12 @@ public class FieldAdjustmentMgr : MonoBehaviour
     public void CancelAdjust()
     {
         recongnizer.StopCapturingGestures();
-        locationWithPoints.SaveOffset();
+
+        if (locationWithPoints != null)
+        {
+            locationWithPoints.SaveOffset();
+            locationWithPoints.visualizeAnchorPoints = false;
+        }
     }
 
     public void ResetFieldOffset()
