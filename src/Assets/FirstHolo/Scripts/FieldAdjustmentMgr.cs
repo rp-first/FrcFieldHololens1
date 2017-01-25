@@ -145,6 +145,9 @@ public class FieldAdjustmentMgr : MonoBehaviour
                     {
                         lr.enabled = true;
                     }
+
+                    var cursor = FindObjectOfType<HoloToolkit.Unity.InputModule.Cursor>();
+                    if (cursor) cursor.gameObject.SetActive(false);
                 }
             }
         }
@@ -209,6 +212,9 @@ public class FieldAdjustmentMgr : MonoBehaviour
             {
                 selectedPoint.localPosition = startPos;
                 selectedPoint.gameObject.AddComponent<WorldAnchor>();
+
+                var cursor = FindObjectOfType<HoloToolkit.Unity.InputModule.Cursor>();
+                if (cursor) cursor.gameObject.SetActive(true);
             }
             selectedPoint = null;
         }
