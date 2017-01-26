@@ -55,6 +55,8 @@ public class FieldAdjustmentMgr : MonoBehaviour
 
     public TrackableLocation locationWithPoints;
 
+    private GameObject cursor;
+
     private void Start()
     {
         // create but don't start until in adjustment mode
@@ -151,8 +153,13 @@ public class FieldAdjustmentMgr : MonoBehaviour
                         lr.enabled = true;
                     }
 
-                    var cursor = FindObjectOfType<HoloToolkit.Unity.InputModule.Cursor>();
-                    if (cursor) cursor.gameObject.SetActive(false);
+                    // hide cursor on native mode
+                    var cc = FindObjectOfType<HoloToolkit.Unity.InputModule.Cursor>();
+                    if (cc)
+                    {
+                        cursor = cc.gameObject;
+                        cursor.SetActive(false);
+                    }
                 }
             }
         }
@@ -197,13 +204,11 @@ public class FieldAdjustmentMgr : MonoBehaviour
         }
         if (_execType == AdjustmentMode.Native && selectedPoint != null)
         {
-            //var worldPoint = selectedPoint.transform.parent.gameObject;
-            //DestroyImmediate(worldPoint.GetComponent<WorldAnchor>());
-            //worldPoint.transform.position += cumulativeDelta;
-            //selectedPoint.transform.localPosition = Vector3.zero;
-
             // save if we made changes to keep
             locationWithPoints.SaveLocation();
+
+            // reshow cursor
+            if (cursor) cursor.SetActive(true);
 
             selectedPoint = null;
         }
@@ -217,9 +222,9 @@ public class FieldAdjustmentMgr : MonoBehaviour
             {
                 selectedPoint.localPosition = startPos;
                 selectedPoint.gameObject.AddComponent<WorldAnchor>();
-
-                var cursor = FindObjectOfType<HoloToolkit.Unity.InputModule.Cursor>();
-                if (cursor) cursor.gameObject.SetActive(true);
+                
+                // reshow cursor
+                if (cursor) cursor.SetActive(true);
             }
             selectedPoint = null;
         }

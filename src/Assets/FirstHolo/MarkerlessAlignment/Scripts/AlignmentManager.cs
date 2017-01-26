@@ -21,8 +21,10 @@ using UnityEngine.VR.WSA.Input;
 using System;
 using UnityEngine.VR.WSA;
 using UnityEngine.Events;
+using HoloToolkit.Unity.InputModule;
 
-public class AlignmentManager : MonoBehaviour {
+public class AlignmentManager : MonoBehaviour, IInputHandler, IManipulationHandler
+{
     public float delta = 0.1f;
     
     public UnityEngine.VR.WSA.SpatialMappingRenderer spatialRenderer;
@@ -46,9 +48,25 @@ public class AlignmentManager : MonoBehaviour {
     private Vector3 originalBeaconPosition;
     private bool aligningAnchor = false;
 
+    private GameObject cursor;
+
     public AlignmentStateManager stateManager;
     public void Align(TrackableLocation location)
     {
+        // hide cursor
+        var cc = FindObjectOfType<HoloToolkit.Unity.InputModule.Cursor>();
+        if (cc)
+        {
+            cursor = cc.gameObject;
+            cursor.SetActive(false);
+        }
+
+        // add input capture
+        if(InputManager.IsInitialized)
+        {
+            InputManager.Instance.PushFallbackInputHandler(gameObject);
+        }
+
         Debug.Log("Aligning " + location.name);
         if (spatialRenderer)
         {
@@ -66,6 +84,8 @@ public class AlignmentManager : MonoBehaviour {
     public void CancelAlignment()
     {
         coroutineState = CoroutineState.Cancelled;
+
+        Cleanup();
     }
     public void ToggleAlignment(TrackableLocation location)
     {
@@ -113,7 +133,7 @@ public class AlignmentManager : MonoBehaviour {
 
             //show the beacon
 
-            UpdateHandState(ref handState);
+            //UpdateHandState(ref handState);
             bool hit = false;
             RaycastHit gazeHit;
             hit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out gazeHit, 10);
@@ -143,7 +163,7 @@ public class AlignmentManager : MonoBehaviour {
             else if(handState.dragging && aligningAnchor)
             {//if pressed we instead want to move it relative to the hand position
                 beaconCursor.SetActive(true);
-                beaconCursor.transform.position = originalBeaconPosition +(handState.position - originalHandPosition)   ;
+                beaconCursor.transform.position = originalBeaconPosition + (handState.position);// - originalHandPosition)   ;
              
             }
                 
@@ -178,6 +198,10 @@ public class AlignmentManager : MonoBehaviour {
                 
                 }
             //}
+
+            // should reset
+            handState.pressed = false;
+            handState.released = false;
             yield return null;
         }
         Destroy(beaconCursor);
@@ -220,6 +244,9 @@ public class AlignmentManager : MonoBehaviour {
         location.gameObject.SetActive(true);
         location.SaveLocation();
         coroutineState = CoroutineState.Inactive;
+
+        // should reset
+        Cleanup();
     }
 
     private Quaternion getRotation(Vector3[] obj1, Vector3[] obj2)
@@ -254,56 +281,48 @@ public class AlignmentManager : MonoBehaviour {
         return quatRotation;
     }
 
-
-    private void UpdateHandState(ref HandState state)
+    private void Cleanup()
     {
-#if UNITY_EDITOR
-        var mousePos = Input.mousePosition;
-        mousePos.z = .5f;
-        state.position = Camera.main.ScreenToWorldPoint(mousePos);
-        state.pressed = Input.GetMouseButtonDown(0);
-        state.released = Input.GetMouseButtonUp(0);
-        state.dragging = Input.GetMouseButton(0);
-        state.id = 1;
-#else
-       InteractionSourceState[] interactions = InteractionManager.GetCurrentReading();
-        InteractionSourceState handEvent;
-        if (state.id != uint.MaxValue && state.id!=0)
-        {
-            uint id = state.id;
-            handEvent = Array.Find<InteractionSourceState>(interactions, (x) => (x.source.id == id));
+        // reshow the cursor
+        if (cursor) cursor.SetActive(true);
 
-        }
-        else
-            handEvent = Array.Find<InteractionSourceState>(interactions, (x) => (x.source.kind == InteractionSourceKind.Hand));
-        if (handEvent.source.id != uint.MaxValue && handEvent.source.id != 0)
+        // remove the input capture
+        if (InputManager.IsInitialized)
         {
-            handEvent.properties.location.TryGetPosition(out state.position);
-            if (state.pressed || state.dragging)
-            {
-                state.pressed = false;
-                state.dragging = handEvent.pressed;
-                state.released = !handEvent.pressed;
-            }
-            else
-            {
-                state.pressed = handEvent.pressed;
-                state.dragging = false;
-                state.released = false;
-            }
-           
-            //state.pressed = handEvent.pressed;
+            InputManager.Instance.PopFallbackInputHandler();
+        }
+    }
 
-            state.id = handEvent.source.id;
-        }
-        else
-        {
-            state.id = uint.MaxValue;
-            state.dragging = false;
-            state.pressed = false;
-            state.released = false;
-            state.position = Vector3.zero;
-        }
-#endif
+    public void OnInputUp(InputEventData eventData)
+    {
+        handState.dragging = false;
+        handState.released = true;
+    }
+
+    public void OnInputDown(InputEventData eventData)
+    {
+        handState.pressed = true;
+    }
+
+    public void OnManipulationStarted(ManipulationEventData eventData)
+    {
+    }
+
+    public void OnManipulationUpdated(ManipulationEventData eventData)
+    {
+        handState.dragging = true;
+        handState.position = eventData.CumulativeDelta;
+    }
+
+    public void OnManipulationCompleted(ManipulationEventData eventData)
+    {
+        handState.dragging = false;
+        handState.released = true;
+    }
+
+    public void OnManipulationCanceled(ManipulationEventData eventData)
+    {
+        handState.dragging = false;
+        handState.released = true;
     }
 }
