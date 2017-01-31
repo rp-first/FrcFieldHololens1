@@ -341,6 +341,11 @@ public class UWPServer : Singleton<UWPServer> {
             {
                 ValueItem[] data = await ParseData(reader);
 
+                if(data.Length == 0)
+                {
+                    break;
+                }
+
                 for (int i = 0; i < data.Length; i++)
                 {
 					_pub.Publish(i,data[i]);
@@ -354,19 +359,23 @@ public class UWPServer : Singleton<UWPServer> {
             throw e;
         }
 
-        if (_tcpSocket != null)
+        // if closing
+        if(!_serverIsEnabled)
         {
-            await _tcpSocket.CancelIOAsync();
-            _connections.Clear();
-            _tcpSocket.ConnectionReceived -= _tcpSocket_ConnectionReceived;
-            _tcpSocket.Dispose();
-            _tcpSocket = null;
-        }
-      
-        await socket.CancelIOAsync();
-        socket.Dispose();
+            if (_tcpSocket != null)
+            {
+                await _tcpSocket.CancelIOAsync();
+                _connections.Clear();
+                _tcpSocket.ConnectionReceived -= _tcpSocket_ConnectionReceived;
+                _tcpSocket.Dispose();
+                _tcpSocket = null;
+            }
 
-        _activeConnection = PROTOCOL.NONE;
+            await socket.CancelIOAsync();
+            socket.Dispose();
+
+            _activeConnection = PROTOCOL.NONE;
+        }
 
     }
 
@@ -375,7 +384,15 @@ public class UWPServer : Singleton<UWPServer> {
         reader.ByteOrder = ByteOrder.BigEndian;
         reader.InputStreamOptions = InputStreamOptions.Partial;
 
-        var headerLength = await reader.LoadAsync(6);
+        uint headerLength = 0;
+        try
+        {
+            headerLength = await reader.LoadAsync(6);
+        }
+        catch(System.Exception e)
+        {
+            // ignore this error
+        }
 
         if (headerLength != 6)
         {
