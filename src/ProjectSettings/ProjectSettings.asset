@@ -10,8 +10,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: firstrobotics
-  productName: firstrobotics
+  companyName: FIRST-NASA
+  productName: FrcField
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13333334, g: 0.17254902, b: 0.21176471, a: 1}
@@ -458,9 +458,9 @@ PlayerSettings:
   metroCertificateSubject: firstrobotics
   metroCertificateIssuer: firstrobotics
   metroCertificateNotAfter: 806b304dd389d301
-  metroApplicationDescription: holonaut
+  metroApplicationDescription: Displays virtual field and annotations.
   wsaImages: {}
-  metroTileShortName: holonaut
+  metroTileShortName: FrcField
   metroCommandLineArgsFile: 
   metroTileShowName: 0
   metroMediumTileShowName: 0
