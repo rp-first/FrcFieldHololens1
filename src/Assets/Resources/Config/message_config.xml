@@ -4,7 +4,7 @@
 	
 	<comm_mode value="TCP" /> <!-- TCP or UDP (anything other than TCP means use UDP) -->
 	<dest_host value="127.0.0.1" />
-	<dest_port value="8765" />
+	<dest_port value="7900" />
 	
 	<message>
 	     <value name="Auton Enabled: " 		type="boolean" 	default="false" />

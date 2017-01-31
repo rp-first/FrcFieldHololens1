@@ -194,6 +194,17 @@ An experimental heads up display is provided with the `HoloHud` component.  This
 
 THe `HoloHud` matches HoloLens screen dimension and is placed at a configurable distance from the user's camera at all times.  Margins can be adjusted to extend the HUD outside of the user's field of view.  Placing elements in the margins can be keep the user's gaze clear of distractions while providing quick access to information at a glance.
 
+## Data over USB
+
+**Note:** *This will only work on a custom build of hololens*
+
+IP over USB is installed with the Windows Phone SDK (more info [here](http://sysdev.microsoft.com/en-us/Hardware/oem/docs/Phone_Testing/Configuring_IP_over_USB))
+Just open the file *ipoverusb-first.reg* in Setup, this will add "FrcField 7900 -> 127.0.0.1:7900".
+Make sure to unplug the hololens and replug it in for the port to work.
+You may verify that it should be working with *IpOverUsbEnum.exe*, as seen below.
+
+![IP over USB example](docs/imgs/usb_ip.png)
+
 
 # License
 
