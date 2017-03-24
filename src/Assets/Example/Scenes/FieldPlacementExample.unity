@@ -30542,11 +30542,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22409162, guid: 8436b6ecda3c395469273268e0d23d3d, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 973
+      value: 1173
       objectReference: {fileID: 0}
     - target: {fileID: 22409162, guid: 8436b6ecda3c395469273268e0d23d3d, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 484
+      value: 634
       objectReference: {fileID: 0}
     - target: {fileID: 22409162, guid: 8436b6ecda3c395469273268e0d23d3d, type: 2}
       propertyPath: m_AnchorMin.x
@@ -30578,11 +30578,11 @@ Prefab:
       objectReference: {fileID: 908755861}
     - target: {fileID: 22438542, guid: 8436b6ecda3c395469273268e0d23d3d, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 1333
+      value: 1533
       objectReference: {fileID: 0}
     - target: {fileID: 22438542, guid: 8436b6ecda3c395469273268e0d23d3d, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 844
+      value: 994
       objectReference: {fileID: 0}
     - target: {fileID: 22427734, guid: 8436b6ecda3c395469273268e0d23d3d, type: 2}
       propertyPath: m_SizeDelta.x
@@ -30626,7 +30626,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22438542, guid: 8436b6ecda3c395469273268e0d23d3d, type: 2}
       propertyPath: m_Pivot.x
-      value: 0.4996249
+      value: 0.49967384
       objectReference: {fileID: 0}
     - target: {fileID: 11405914, guid: 8436b6ecda3c395469273268e0d23d3d, type: 2}
       propertyPath: rightMargin
@@ -41926,6 +41926,86 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3eddd1c29199313478dd3f912bfab2ab, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1342745581
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1342745582}
+  - component: {fileID: 1342745585}
+  - component: {fileID: 1342745584}
+  - component: {fileID: 1342745583}
+  m_Layer: 5
+  m_Name: RawImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1342745582
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1342745581}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1356597445}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -36, y: -51}
+  m_SizeDelta: {x: 60, y: 40}
+  m_Pivot: {x: 1, y: 1}
+--- !u!114 &1342745583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1342745581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546982389ab3be5478164a87a8b97010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  video: {fileID: 1342745584}
+--- !u!114 &1342745584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1342745581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -98529514, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &1342745585
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1342745581}
 --- !u!1 &1343398073
 GameObject:
   m_ObjectHideFlags: 0
@@ -42306,6 +42386,7 @@ RectTransform:
   m_Children:
   - {fileID: 774387261}
   - {fileID: 173663895}
+  - {fileID: 1342745582}
   m_Father: {fileID: 446768777}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

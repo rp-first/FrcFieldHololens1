@@ -26,17 +26,35 @@ class NetworkEndianReader : BinaryReader
 
     public NetworkEndianReader(System.IO.Stream stream) : base(stream) { }
 
+    public override uint ReadUInt32()
+    {
+        a32 = base.ReadBytes(4);
+        if (BitConverter.IsLittleEndian) Array.Reverse(a32);
+        return BitConverter.ToUInt32(a32, 0);
+    }
     public override int ReadInt32()
     {
         a32 = base.ReadBytes(4);
         if(BitConverter.IsLittleEndian) Array.Reverse(a32);
         return BitConverter.ToInt32(a32, 0);
     }
+    public override ushort ReadUInt16()
+    {
+        a16 = base.ReadBytes(2);
+        if (BitConverter.IsLittleEndian) Array.Reverse(a16);
+        return BitConverter.ToUInt16(a16, 0);
+    }
     public override short ReadInt16()
     {
         a16 = base.ReadBytes(2);
         if (BitConverter.IsLittleEndian) Array.Reverse(a16);
         return BitConverter.ToInt16(a16, 0);
+    }
+    public override ulong ReadUInt64()
+    {
+        a64 = base.ReadBytes(8);
+        if (BitConverter.IsLittleEndian) Array.Reverse(a64);
+        return BitConverter.ToUInt64(a64, 0);
     }
     public override long ReadInt64()
     {

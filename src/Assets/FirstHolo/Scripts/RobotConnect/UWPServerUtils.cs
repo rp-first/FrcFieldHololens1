@@ -35,3 +35,12 @@ public enum PROTOCOL
 	UDP,
 	TCP
 }
+
+public enum MSG_TYPE: byte
+{
+    UNKNOWN,
+    PARAMS,
+    VIDEO,
+    ACK=0xFF,
+    NACK=0xFE
+}

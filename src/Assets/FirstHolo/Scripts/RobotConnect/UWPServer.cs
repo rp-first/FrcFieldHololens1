@@ -261,12 +261,6 @@ public class UWPServer : Singleton<UWPServer> {
                         NetworkEndianReader reader = new NetworkEndianReader(ns);
                         ValueItem [] data = ParseData(reader);
 
-                        for (int i = 0; i < data.Length; i++)
-                        {
-							_pub.Publish(i,data[i]);
-                        }
-
-
                         reader.Close();
                         client.Close();
                     }
@@ -298,11 +292,6 @@ public class UWPServer : Singleton<UWPServer> {
                     NetworkEndianReader reader = new NetworkEndianReader(new MemoryStream(receiveBytes));
                     
                     ValueItem[] data = ParseData(reader);
-
-                    for (int i = 0; i < data.Length; i++)
-                    {
-						_pub.Publish(i,data[i]);
-                    }
 
                     reader.Close();
                 }
@@ -453,41 +442,58 @@ public class UWPServer : Singleton<UWPServer> {
     private ValueItem[] ParseData(NetworkEndianReader reader)
     {
         List <ValueItem>  dataParsed = new List<ValueItem>();
-
-        reader.ReadInt16(); // two byte sync pattern
+        short sync = reader.ReadInt16(); // two byte sync pattern
+        MSG_TYPE msgType = (MSG_TYPE)reader.ReadByte();
         ushort count = reader.ReadUInt16(); // message count
-        reader.ReadInt16(); // message size
+        ushort size = reader.ReadUInt16(); // message size
 
-        foreach (var value in _loadedConfig.Message.Value)
+        Debug.Log(sync + " - " + count + ": " + size);
+        Debug.Log(msgType.ToString());
+
+        if (msgType == MSG_TYPE.PARAMS)
         {
-            switch (value.Type)
+            foreach (var value in _loadedConfig.Message.Value)
             {
-                case "float":
-                case "single":
-                    dataParsed.Add(new ValueItem(value.Name, reader.ReadSingle(), float.Parse(value.Default)));
-                    break;
-                case "bool":
-                case "boolean":
-                    dataParsed.Add(new ValueItem(value.Name, reader.ReadBoolean(), bool.Parse(value.Default)));
-                    break;
-                case "double":
-                    dataParsed.Add(new ValueItem(value.Name, reader.ReadDouble(), double.Parse(value.Default)));
-                    break;
-                case "short":
-                case "int16":
-                    dataParsed.Add(new ValueItem(value.Name, reader.ReadInt16(), short.Parse(value.Default)));
-                    break;
-                case "int":
-                case "int32":
-                    dataParsed.Add(new ValueItem(value.Name, reader.ReadInt32(), int.Parse(value.Default)));
-                    break;
-                case "long":
-                case "int64":
-                    dataParsed.Add(new ValueItem(value.Name, reader.ReadInt64(), long.Parse(value.Default)));
-                    break;
-                default:
-                    return null;
+                switch (value.Type)
+                {
+                    case "float":
+                    case "single":
+                        dataParsed.Add(new ValueItem(value.Name, reader.ReadSingle(), float.Parse(value.Default)));
+                        break;
+                    case "bool":
+                    case "boolean":
+                        dataParsed.Add(new ValueItem(value.Name, reader.ReadBoolean(), bool.Parse(value.Default)));
+                        break;
+                    case "double":
+                        dataParsed.Add(new ValueItem(value.Name, reader.ReadDouble(), double.Parse(value.Default)));
+                        break;
+                    case "short":
+                    case "int16":
+                        dataParsed.Add(new ValueItem(value.Name, reader.ReadInt16(), short.Parse(value.Default)));
+                        break;
+                    case "int":
+                    case "int32":
+                        dataParsed.Add(new ValueItem(value.Name, reader.ReadInt32(), int.Parse(value.Default)));
+                        break;
+                    case "long":
+                    case "int64":
+                        dataParsed.Add(new ValueItem(value.Name, reader.ReadInt64(), long.Parse(value.Default)));
+                        break;
+                    default:
+                        return null;
+                }
             }
+
+            for (int i = 0; i < dataParsed.Count; i++)
+            {
+                _pub.Publish(i, dataParsed[i]);
+            }
+        }
+        else if(msgType == MSG_TYPE.VIDEO)
+        {
+            Debug.Log("got video");
+            dataParsed.Add(new ValueItem("video", reader.ReadBytes(size), new byte[0]));
+            _pub.Publish(0xBEEF, dataParsed[0]);
         }
 
         return dataParsed.ToArray();
